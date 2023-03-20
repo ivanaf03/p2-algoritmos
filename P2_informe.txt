@@ -1,0 +1,447 @@
+	TÍTULO: Práctica 2 de Algoritmos, Ordenación |
+_____________________________________________________|_____________________
+	AUTOR:Iván Álvarez Fernandez        LOGIN 1:ivan.alvarez.fernandez |
+	AUTOR:Marcos Gómez Tejón	    LOGIN 2:m.tejon 		   |
+___________________________________________________________________________|
+	GRUPO: 1.4  	 |
+-------------------------|
+        FECHA: 14/10/2022|
+________________________/
+
+
+__________________________________________
+	CARACTERÍSTICAS DEL PROCESADOR: //
+---------------------------------------//
+ Intel Core i5-1035G1
+ Max Freq:   3.600 GHz
+ Cores:  4 cores (8 threads)
+
+
+______________________________________
+	CARACTERÍSTICAS DEL EQUIPO: //
+-----------------------------------//
+ OS: Linux Mint 21 x86_64 
+ Memoria RAM: 8,0 GiB
+ Arquitectura: 64 bits
+ GPU: Intel Iris Plus Graphics G1 
+
+
+_______________________________________    
+        INTRODUCCIÓN:                //
+------------------------------------//
+
+En esta práctica se nos pide el analisis 2 algoritmos de ordenación:
+
+--------------------------
+ORDENACIÓN POR INSERCIÓN |
+--------------------------
+
+Para este algoritmo se nos pide que implementemos y comprobemos el correcto
+funcionamiento de dos algoritmos y que determinemos empíricamente los tiempos
+de ejecución para diferentes tamaños del vector y para 3 situaciones iniciales:
+
+-Vector ordenado en orden ascendente
+-Vector ordenado en orden descendente
+-Vector inicialmente desordenado.
+
+Además, debemos calcular empíricamente la complejidad del algoritmo para 
+cada una de las diferentes situaciones iniciales del vector.
+
+------------------
+ORDENACIÓN RÁPIDA|
+------------------
+
+Para este algoritmo se nos pide que lo implementemos y comprobemos su correcto
+funcionamiento. Se nos pide también que determinemos empíricamente los tiempos
+de ejecución y los comparemos para diferentes tamaños del vector y para 3 
+situaciones iniciales (coinciden con los casos de ordenación por inserción), 
+pero esta vez además, debemos probar con distintos tamaños del umbral: 1, 10 
+y 100.
+En función de la situación inicial del vector, ¿con qué umbral se obtienen los
+mejores tiempos?, ¿por qué?
+Además, debemos calcular la empíricamente la complejidad del algoritmo para 
+cada una de las diferentes situaciones iniciales del vector y con cada uno de
+los umbrales.
+
+_______________________________________   
+	DESCRIPCIÓN DE LA PRÁCTICA:  //
+------------------------------------//
+
+||Test de verificación del correcto funcionamiento de los algoritmos:
+
+Ordenación por inserción aleatoria
+-7 -7 -5 -10 5 -4 9 1 0 10 
+-10 -7 -7 -5 -4 0 1 5 9 10 
+Ordenado
+Ordenación por inserción ascendente
+0 1 2 3 4 5 6 7 8 9 
+0 1 2 3 4 5 6 7 8 9 
+Ordenado
+Ordenación por inserción descendente
+10 9 8 7 6 5 4 3 2 1 
+1 2 3 4 5 6 7 8 9 10 
+Ordenado
+Ordenación por quicksort aleatoria
+-3 1 5 1 -4 -6 7 5 1 0 
+-6 -4 -3 0 1 1 1 5 5 7 
+Ordenado
+Ordenación por quicksort ascendente
+0 1 2 3 4 5 6 7 8 9 
+0 1 2 3 4 5 6 7 8 9 
+Ordenado
+Ordenación por quicksort descendente
+10 9 8 7 6 5 4 3 2 1 
+1 2 3 4 5 6 7 8 9 10 
+Ordenado
+
+#Medición de tiempos (t(n)): microsegundos
+		   
+|| (*)--> El asterisco refleja que el tiempo de ejecución es menor que 500 ms||
+|| por lo tanto repetimos el bucle 1000 veces (k=1000).	 	             ||
+
+-------------------------------------------------------------------------------
+			  -<||ORDENACIÓN POR INSERCIÓN||>- 	              |
+-------------------------------------------------------------------------------
+
+||>--------------------->VECTOR ORDENADO ACENDENDENTEMENTE<-----------------<||
+
+COMPLEJIDAD/
+------------------------------|	
+Cota subestimada: O(n^0.9)    |
+Cota ajustada: O(n)           |
+Cota sobrestimada: O(n^1.1)   |
+
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+        
+*      500        1.60500       0.0059759       0.0032100       0.0017243
+*     1000        2.93100       0.0058481       0.0029310       0.0014690
+*     2000        6.34300       0.0067822       0.0031715       0.0014831
+*     4000       12.76800       0.0073159       0.0031920       0.0013927
+*     8000       24.99900       0.0076761       0.0031249       0.0012721
+*    16000       50.45700       0.0083026       0.0031536       0.0011978
+*    32000       94.69100       0.0083498       0.0029591       0.0010487
+
+OBSERVACIONES:  La cota ajustada está entre 0.0029 y 0.0031 aproximadamente.
+La complejidad computacional es O(n).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos.
+
+||>-------------------->VECTOR ORDENADO DESCENDENDENTEMENTE<----------------<||
+
+COMPLEJIDAD/
+------------------------------|	
+Cota subestimada: O(n^1.9)    |
+Cota ajustada: O(n^2)          |
+Cota sobrestimada: O(n^2.1)   |
+
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+	
+*      500      306.69200       0.0022838       0.0012268       0.0006590
+      1000     1326.00000       0.0026457       0.0013260       0.0006646
+      2000     5097.00000       0.0027249       0.0012742       0.0005959
+      4000    20109.00000       0.0028806       0.0012568       0.0005484
+      8000    79536.00000       0.0030528       0.0012427       0.0005059
+     16000   311576.00000       0.0032043       0.0012171       0.0004623
+     32000  1241359.00000       0.0034207       0.0012123       0.0004296
+     
+OBSERVACIONES:  La cota ajustada es 0.0012 aproximadamente.
+La complejidad computacional es O(n^2).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy altos.
+
+||>--------------------------->VECTOR DESORDENADO<--------------------------<||
+
+COMPLEJIDAD/
+------------------------------|	
+Cota subestimada: O(n^1.9)    |
+Cota ajustada: O(n^1.98)      |
+Cota sobrestimada: O(n^2.1)   |
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500      165.92400       0.0012356       0.0007515       0.0003565
+      1000      684.00000       0.0013648       0.0007853       0.0003428
+#     2000     2479.00000       0.0013253       0.0007215       0.0002898
+      4000    10757.00000       0.0015409       0.0007936       0.0002933
+      8000    40369.00000       0.0015494       0.0007550       0.0002568
+     16000   158232.00000       0.0016273       0.0007501       0.0002348
+     32000   633240.00000       0.0017450       0.0007610       0.0002192
+ 
+OBSERVACIONES:  La cota ajustada es 0.0075 aproximadamente.
+La complejidad computacional es O(n^1.98).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son bastante altos.
+# anomalía cuando n=2000 en esta tabla.
+
+-------------------------------------------------------------------------------
+			   -<||ORDENACIÓN RÁPIDA||>-		              |
+-------------------------------------------------------------------------------
+
+||>--------------------->VECTOR ORDENADO ACENDENDENTEMENTE<-----------------<||
+
+			       o--------------o
+			       || UMBRAL = 1 ||
+			       o--------------o
+------------
+COMPLEJIDAD/
+------------------------------|					
+Cota subestimada: O(n^1.05)  |
+Cota ajustada: O(n^1.1)      |
+Cota sobrestimada: O(n^1.2)  |	
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada			
+					
+*      500       24.54100       0.0351797       0.0257836       0.0138499
+*     1000       51.05000       0.0361052       0.0255605       0.0128106
+*     2000      111.14700       0.0379526       0.0259531       0.0121363
+*     4000      227.14100       0.0374855       0.0247605       0.0108032
+*     8000      472.84100       0.0376442       0.0240183       0.0097776
+     16000     1032.00000       0.0397515       0.0244990       0.0093054
+     32000     2339.00000       0.0435134       0.0259039       0.0091802
+     
+OBSERVACIONES:  La cota ajustada es 0.0025 aproximadamente.
+La complejidad computacional es O(n^1.1).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son bastante altos para estar ya ordenado. 
+  
+			       o---------------o
+			       || UMBRAL = 10 ||
+			       o---------------o
+------------
+COMPLEJIDAD/
+------------------------------|					
+Cota subestimada: O(n^0.95)   |
+Cota ajustada: O(n^1.1)       |
+Cota sobrestimada: O(n^1.25)  |	
+					
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500       15.18500       0.0409326       0.0161148       0.0063442
+*     1000       32.63200       0.0452012       0.0160380       0.0056905
+*     2000       71.90700       0.0519134       0.0166007       0.0053085
+*     4000      153.26400       0.0579074       0.0166888       0.0048097
+*     8000      331.83600       0.0648474       0.0168434       0.0043749 
+     16000      706.00000       0.0715963       0.0167600       0.0039233
+     32000     1446.00000       0.0759059       0.0160141       0.0033786
+
+OBSERVACIONES:  La cota ajustada es 0.0016 aproximadamente.
+La complejidad computacional es O(n^1.1).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son bastante altos para estar ya ordenado. 
+					
+			       o----------------o
+			       || UMBRAL = 100 ||
+			       o----------------o
+------------
+COMPLEJIDAD/
+------------------------------|					
+Cota subestimada: O(n^1.1)    |
+Cota ajustada: O(n^1.2)       |
+Cota sobrestimada: 0(n^1.28)  |	
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500        7.20900       0.0075202       0.0040396       0.0024571
+*     1000       16.99000       0.0080190       0.0040190       0.0023127
+*     2000       40.61700       0.0093525       0.0043734       0.0023809
+*     4000       92.87000       0.0100351       0.0043784       0.0022550
+*     8000      208.53700       0.0105844       0.0043088       0.0020995
+#    16000      513.00000       0.0121783       0.0046257       0.0021323
+     32000     1060.00000       0.0117393       0.0041603       0.0018143
+
+OBSERVACIONES:  La cota ajustada es 0.0041 aproximadamente.
+La complejidad computacional es O(n^1.2).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son bastante altos para estar ya ordenado. 
+# anomalía cuando n=16000 en esta tabla.
+
+||>-------------------->VECTOR ORDENADO DESCENDENDENTEMENTE<----------------<||
+
+			       o--------------o
+			       || UMBRAL = 1 ||
+			       o--------------o
+------------
+COMPLEJIDAD/
+------------------------------|		
+Cota subestimada: O(n^0.95)   |
+Cota ajustada: O(n^1.07)      |
+Cota sobrestimada: O(n^1.2)   |		
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada		
+
+*      500       26.15000       0.0709499       0.0336570       0.0150041
+*     1000       54.12200       0.0762770       0.0332961       0.0135642
+*     2000      115.63900       0.0840852       0.0337750       0.0125737
+*     4000      241.16800       0.0912137       0.0337142       0.0114695
+      8000      513.00000       0.1005037       0.0341831       0.0106270
+     16000     1043.00000       0.1057719       0.0331037       0.0094046
+     32000     2243.00000       0.1177435       0.0339093       0.0088034
+
+OBSERVACIONES:  La cota ajustada es 0.0033 aproximadamente.
+La complejidad computacional es O(n^1.07).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son bastante bajos. 
+					
+			       o---------------o
+			       || UMBRAL = 10 ||
+			       o---------------o
+------------
+COMPLEJIDAD/
+------------------------------|		
+Cota subestimada: O(n^0.98)   |
+Cota ajustada: O(n^1.11)      |
+Cota sobrestimada: O(n^1.25)  |	
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500       15.78800       0.0339704       0.0151438       0.0063442
+*     1000       33.70600       0.0378891       0.0154353       0.0058683
+*     2000       76.72100       0.0442389       0.0164691       0.0056823
+*     4000      161.63400       0.0475124       0.0161636       0.0050612
+*     8000      348.50000       0.0520656       0.0161864       0.0045996
+     16000      685.00000       0.0519581       0.0147611       0.0038066
+     32000     1555.00000       0.0597976       0.0155244       0.0036332
+
+OBSERVACIONES:  La cota ajustada es 0.0015 aproximadamente.
+La complejidad computacional es O(n^1.11).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos. 
+					
+			       o----------------o
+			       || UMBRAL = 100 ||
+			       o----------------o
+------------
+COMPLEJIDAD/
+------------------------------|		
+Cota subestimada:O(n^1.12)    |
+Cota ajustada: O(n^1.145)     |
+Cota sobrestimada: O(n^1.25)  |	
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500       10.83300       0.0094875       0.0081223       0.0042295
+*     1000       22.74300       0.0096033       0.0080802       0.0039122
+*     2000       48.02900       0.0096402       0.0079719       0.0035888
+*     4000      105.38300       0.0097025       0.0078855       0.0033008
+*     8000      232.26400       0.0098634       0.0078786       0.0030664
+     16000      519.00000       0.0101520       0.0079698       0.0028841
+     32000     1154.00000       0.0103857       0.0080133       0.0026963
+
+OBSERVACIONES:  La cota ajustada está entre 0.0078 y 0.0080 aproximadamente.
+La complejidad computacional es O(n^1.145).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos.
+
+||>--------------------------->VECTOR DESORDENADO<--------------------------<||
+
+			       o--------------o
+			       || UMBRAL = 1 ||
+			       o--------------o
+------------
+COMPLEJIDAD/
+------------------------------|		
+Cota subestimada: O(n^1.05)   |
+Cota ajustada: O(n^1.1)       |
+Cota sobrestimada:  t/(n^1.25)|
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500       38.74600       0.0557013       0.0408241       0.0160720
+*     1000       84.04500       0.0594674       0.0420997       0.0149375
+*     2000      183.74400       0.0625705       0.0427876       0.0136824
+*     4000      390.75700       0.0644023       0.0425401       0.0122600
+      8000      846.00000       0.0674724       0.0430498       0.0111817
+     16000     1731.00000       0.0666762       0.0410927       0.0096194
+     32000     3744.00000       0.0696512       0.0414640       0.0087478	
+
+OBSERVACIONES:  La cota ajustada es 0.0041 aproximadamente.
+La complejidad computacional es O(n^1.1).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos.
+					
+			       o---------------o
+			       || UMBRAL = 10 ||
+			       o---------------o
+------------
+COMPLEJIDAD/
+-----------------------------|		
+Cota subestimada: O(n^0.99)  |
+Cota ajustada: O(n*log10(n)) |
+Cota sobrestimada: O(n^1.24) |
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+					
+*      500       35.67000       0.0744882       0.0259358       0.0157523 
+*     1000       79.11000       0.0846500       0.0263333       0.0150531 
+*     2000      174.44100       0.0938706       0.0263554       0.0140369 
+*     4000      378.64700       0.1026721       0.0262350       0.0129103   
+      8000      802.00000       0.1096769       0.0256848       0.0115969   
+     16000     1721.00000       0.1184956       0.0255850       0.0105359  
+     32000     3843.00000       0.1332208       0.0266570       0.0099606
+ 
+OBSERVACIONES:  La cota ajustada es 0.0026 aproximadamente.
+La complejidad computacional es O(n*log10(n)), que coincide con la teórica.
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos.
+ 				
+			       o----------------o
+			       || UMBRAL = 100 ||
+			       o----------------o
+------------
+COMPLEJIDAD/
+-----------------------------|		
+Cota subestimada: O(n^1.06)  |
+Cota ajustada: O(n^1.1)      |
+Cota sobrestimada: O(n^1.15) |
+
+        n          t(n)        Subestimada	Ajustada      Sobrestimada
+
+*      500       40.23400       0.0551000       0.0429727       0.0314952
+*     1000       87.95700       0.0574803       0.0436033       0.0308688
+*     2000      187.16700       0.0592584       0.0437229       0.0298990
+*     4000      401.90300       0.0609482       0.0437400       0.0288919
+      8000      839.00000       0.0611627       0.0426936       0.0272401
+     16000     1797.00000       0.0628320       0.0426595       0.0262912  
+     32000     3842.00000       0.0644315       0.0425493       0.0253300
+
+OBSERVACIONES:  La cota ajustada es 0.0042 aproximadamente.
+La complejidad computacional es O(n^1.1).
+La cota subestimada crece cuando n tiene a infinito. 
+La cota sobreestimada decrece cuando n tiene a infinito. 
+Los tiempos de ejecución son muy bajos.
+
+
+			        /\/\/\/\/\/\/\/\
+				CONCLUSIÓN FINAL
+			        \/\/\/\/\/\/\/\/
+			  
+A la hora de ordenar un vector afecta mucho el orden inicial de sus elementos,
+ya que si está ordenado ascendentemente, los algoritmos son rápidos.En el caso
+en que esté generado aleatoriamente el vector se ordena más rápido o más lento
+dependiendo del algoritmo. El peor caso siempre es cuando el vector está 
+inicialmente ordenado de forma descendente. Generalmente es más rápido el 
+quicksort que el de inserción. Sin embargo, si el vector está ya ordenado, 
+inserción es más rápido, ya que no hace ninguna inserción. En quicksort, si el
+umbral es 1, no es necesario hacer inserción porque se hacen numerosas llamadas 
+recursivas. En cambio, cuanto mayor sea ese umbral, más eficiente será el 
+ordenamiento.
+
+
+					
+		
+
+
+
